@@ -6,5 +6,6 @@ node_modules/
 .env*
 *.mp4
 *.webm
-docs/current/
-docs/legacy-README.md
+docs/*
+!docs/SHOWCASE.md
+!docs/showcase.jpg

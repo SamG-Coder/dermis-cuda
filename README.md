@@ -2,6 +2,10 @@
 
 [Live demo](https://samg-coder.github.io/dermis-cuda/) · [Showcase recorder](https://samg-coder.github.io/dermis-cuda/showcase.html) · [Build & deployment](https://github.com/SamG-Coder/dermis-cuda/actions)
 
+![Live DERMIS showcase at 100,000 strands](docs/showcase.jpg)
+
+[Download the captioned 1080p showcase and standalone app](https://github.com/SamG-Coder/dermis-cuda/releases/tag/v1.0.0)
+
 A real-time anatomical portrait with procedural skin, eyes and strand hair.
 Edit the face, orbit the camera, change the lighting, enable living motion,
 and push the renderer to 100,000 scalp strands.
@@ -21,6 +25,8 @@ for blinking and subtle gaze changes. Use **View .cu** to inspect the source.
 For the recorded showcase look: choose Extreme quality, skin pigment 0.00,
 roughness 0.57, diffusion 0.55, detail 0.80, hazel/amber iris, pupil 0.33,
 hair pigment 1.00, hair roughness 1.00, length 1.80, breeze 1.00, and living on.
+The ready-to-load [showcase look](assets/showcase-look.json) can be imported with
+the **Open look** button.
 
 ## How it is built
 
