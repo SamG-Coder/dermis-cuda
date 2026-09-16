@@ -1,0 +1,10 @@
+dist/
+generated/
+work/
+node_modules/
+*.log
+.env*
+*.mp4
+*.webm
+docs/current/
+docs/legacy-README.md

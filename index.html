@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101417"><title>DERMIS — CUDA Human Laboratory</title><link rel="stylesheet" href="src/style.css"></head>
+<body>
+<header><a class="brand" href="./"><span class="brand-mark">D</span><span>DERMIS<small>HUMAN LABORATORY</small></span></a><div class="header-center"><span class="status-dot"></span><span id="status">READY TO INITIALIZE</span></div><nav><button id="source-button" class="quiet">View .cu</button><button id="load-button" class="quiet">Open look</button><button id="save-button" class="quiet">Save look</button><button id="capture-button" disabled>Capture PNG <span>↗</span></button><button id="mobile-controls" class="quiet">Controls</button></nav></header>
+<main>
+<aside class="rail"><span class="rail-label">CAMERA</span><button data-camera="portrait" class="rail-btn active"><span>◉</span>Portrait</button><button data-camera="face" class="rail-btn"><span>⊙</span>Face</button><button data-camera="eye" class="rail-btn"><span>◌</span>Eyes</button><button data-camera="threequarter" class="rail-btn"><span>◐</span>¾ view</button><button data-camera="profile" class="rail-btn"><span>◑</span>Profile</button><div class="rail-bottom"><span>01</span><small>ANATOMICAL<br>HUMAN</small></div></aside>
+<section id="viewport" aria-label="Interactive anatomical human viewport">
+<canvas id="portrait" aria-label="CUDA-rendered anatomical human. Drag to orbit, scroll to zoom."></canvas>
+<div class="viewport-title"><span class="eyebrow">REAL-TIME / ANATOMICAL PORTRAIT</span><h1>The human surface.</h1><p>Skin. Light. A thousand little differences.</p></div>
+<div id="welcome"><div class="welcome-inner"><div class="orb">D<span>01</span></div><span class="eyebrow">ANATOMICAL MESH · CUDA SHADING</span><h2>Anatomy, shaped<br>with computation.</h2><p>An adult male anatomical mesh with editable facial form, procedural skin and individual hair strands. Deformed and shaded by CUDA source in your browser.</p><button id="initialize">Initialize portrait <span>↗</span></button><p class="requirements" id="progress">WebGPU required · All code included locally</p></div></div>
+<div class="render-controls"><div class="segmented" role="group" aria-label="Render inspection"><button data-view="0" class="selected">Beauty</button><button data-view="1">Albedo</button><button data-view="2">Normals</button><button data-view="3">Shadows</button><button data-view="4">Topology</button><button data-view="5">Specular</button></div></div>
+<div class="bottom-left"><span class="live-badge" id="render-state">CUDA → WEBGPU</span><span id="sample-count">Waiting for initialization</span></div><div class="bottom-right">Drag to orbit <i>·</i> Scroll to zoom <i>·</i> Right-drag to pan</div>
+<div id="error" role="alert" hidden></div>
+</section>
+<aside class="inspector" id="inspector"><div class="inspector-header"><div><span class="eyebrow">PORTRAIT / 001</span><h2>Surface & character</h2></div><span class="pill">ANATOMICAL</span></div>
+<section class="look-select" id="look-section"><span class="field-label">STARTING LOOK</span><div class="swatches"><button data-look="reference" class="swatch active" style="--swatch:#c6b08b" title="Reference · short blond hair" aria-label="Reference · short blond hair"></button><button data-look="neutral" class="swatch" style="--swatch:#bf997d" title="Neutral brunette" aria-label="Neutral brunette"></button><button data-look="warm" class="swatch" style="--swatch:#ae7b5c" title="Warm brunette" aria-label="Warm brunette"></button><button data-look="dark" class="swatch" style="--swatch:#694732" title="Deep complexion" aria-label="Deep complexion"></button><button data-look="blonde" class="swatch" style="--swatch:#d9bd8a" title="Light hair and blue eyes" aria-label="Light hair and blue eyes"></button><span id="look-name">Reference · short blond</span></div></section>
+<div id="control-sections"></div>
+<section class="quality-section" id="quality-section"><label for="quality">Geometry & render budget</label><select id="quality"><option value="preview">Preview · 4,500 scalp strands</option><option value="balanced" selected>Balanced · 12,000 scalp strands</option><option value="high">High · 22,000 scalp strands</option><option value="stress">Stress · 50,000 scalp strands</option><option value="extreme">Extreme · 100,000 scalp strands</option></select><p>Quality changes the actual geometry and render resolution. FPS depends on your GPU.</p></section>
+<section class="motion-section" id="motion-section"><div><strong>Living portrait</strong><small>CUDA blinks and subtle eye movement</small></div><button id="animate" class="toggle" aria-pressed="false" title="Toggle animation"><span></span></button></section>
+<section class="quality-section stress-section">
+<label for="stress-duration">Stress test</label>
+<select id="stress-duration"><option value="15">15 seconds</option><option value="60" selected>60 seconds</option><option value="300">5 minutes</option></select>
+<p>Uses the selected quality. Continuously rebuilds anatomy, hair and shadows. Stops when this tab is hidden.</p>
+<button id="stress-toggle" disabled aria-pressed="false">Start stress test</button>
+<output id="stress-results" aria-live="off">Ready after initialization</output>
+<p>FPS includes frame scheduling; milliseconds include submission and GPU completion.</p>
+<button id="stress-export" disabled>Export report</button>
+</section>
+<div class="inspector-footer"><button id="reset-look" class="quiet">Reset all</button><span>PARAMETERS → CUDA → PIXELS</span></div></aside>
+</main>
+<footer><div><span class="status-dot"></span><span id="gpu-name">Anatomical portrait pipeline</span></div><div id="metrics">Bundled anatomical mesh <i>·</i> CUDA shading</div><a href="README.md" target="_blank" rel="noopener">Guide & limitations ↗</a></footer>
+<dialog id="source-dialog"><div class="dialog-header"><div><span class="eyebrow">THE SOURCE OF THE PORTRAIT</span><h2>Authored in CUDA.</h2></div><button id="close-source" aria-label="Close source">✕</button></div><div class="source-tabs"><button data-source="human" class="selected">human.cu</button><button data-source="appearance">appearance.cu</button><button data-source="realism">realism.cu</button><button id="download-source">Save source ↧</button></div><p>CUDA WebShader compiles this source when the portrait starts. The small WebGPU bridge only projects geometry and displays the CUDA-computed colours.</p><pre id="source-code"></pre></dialog>
+<input type="file" id="load-file" accept=".json,application/json" hidden>
+<div id="toast" role="status"></div>
+<script type="module" src="src/app.js"></script>
+</body></html>

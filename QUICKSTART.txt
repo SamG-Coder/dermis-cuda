@@ -1,0 +1,16 @@
+DERMIS — CUDA HUMAN LABORATORY
+
+1. Install Node.js 20 or newer.
+2. Extract the whole ZIP to a fresh folder.
+3. Double-click START.bat on Windows, or run: npm start
+4. Open http://localhost:8080 in a WebGPU-capable browser.
+5. Press Initialize portrait. No npm install is needed.
+
+Drag to orbit. Scroll to zoom. Right-drag to pan vertically.
+Use Face / Eyes for close inspection; use the inspector to change skin, eyes,
+hair and lighting. Living portrait enables CUDA blinks and small eye movement.
+Save look / Open look preserve editable settings. Capture PNG captures actual GPU output.
+
+This is a procedural realism prototype; it is not a scanned or photorealistic
+human. CUDA source is translated to WebGPU, not native NVIDIA CUDA in the browser.
+No LCD or other project is required. Read README.md for limitations and testing.

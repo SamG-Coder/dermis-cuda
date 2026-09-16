@@ -1,0 +1,5 @@
+import {deflateSync} from 'node:zlib';import {writeFile} from 'node:fs/promises';
+const table=new Uint32Array(256);for(let i=0;i<256;i++){let c=i;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;table[i]=c>>>0;}
+function crc(bytes){let c=0xffffffff;for(const b of bytes)c=table[(c^b)&255]^(c>>>8);return(c^0xffffffff)>>>0;}
+function chunk(name,data){const type=Buffer.from(name),payload=Buffer.concat([type,data]),out=Buffer.alloc(data.length+12);out.writeUInt32BE(data.length);payload.copy(out,4);out.writeUInt32BE(crc(payload),out.length-4);return out;}
+export async function writePNG(path,floats,width,height){const header=Buffer.alloc(13);header.writeUInt32BE(width);header.writeUInt32BE(height,4);header[8]=8;header[9]=6;const scan=Buffer.alloc(height*(width*4+1));for(let y=0;y<height;y++){const row=y*(width*4+1);scan[row]=0;for(let x=0;x<width*4;x++)scan[row+1+x]=Math.round(Math.max(0,Math.min(1,floats[y*width*4+x]))*255);}await writeFile(path,Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]),chunk('IHDR',header),chunk('IDAT',deflateSync(scan)),chunk('IEND',Buffer.alloc(0))]));}

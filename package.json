@@ -1,0 +1,21 @@
+{
+  "name": "dermis-cuda-portrait",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Anatomical male portrait with GPU deformation, skin, eyes, strand hair and stress testing through CUDA WebShader.",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node tests/unit.mjs",
+    "compile": "node scripts/compile.mjs",
+    "test:gpu": "node tests/gpu.mjs",
+    "test:browser": "python tests/browser.py",
+    "build": "node scripts/build.mjs",
+    "test:present": "node tests/present.mjs",
+    "test:server": "node tests/server.mjs",
+    "test:browser:gpu": "node tests/browser-webgpu.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

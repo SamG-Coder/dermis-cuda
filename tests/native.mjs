@@ -1,0 +1,2 @@
+import {createRequire} from 'node:module';
+export async function nativeGpu(){const addon=process.env.DERMIS_DAWN_PATH?createRequire(import.meta.url)(process.env.DERMIS_DAWN_PATH):await import('webgpu');Object.assign(globalThis,addon.globals);const gpu=addon.create(['backend=vulkan','enable-dawn-features=allow_unsafe_apis']);Object.defineProperty(globalThis,'navigator',{value:{gpu},configurable:true});return gpu;}
